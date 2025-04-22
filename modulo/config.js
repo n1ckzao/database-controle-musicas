@@ -7,7 +7,7 @@
 
 /****************************STATUS CODE DE ERROS*******************************/
 
-const ERROR_REQUIRED_FIELDS = {status: false, status_code: 400, message: 'Existem campos de preenchimento obrigatório ou quantidade de caracteres que não foram atendidos'}
+const ERROR_REQUIRED_FIELDS = {status: false, status_code: 400, message: 'Existem campos de preenchimento obrigatório ou quantidade de caractéres que não foram atendidos'}
 const ERROR_INTERNAL_SERVER_MODEL = {status: false, status_code: 500 , message: 'Devido a um erro interno no servidor da model, não foi possível processar a requisição'}
 const ERROR_INTERNAL_SERVER_CONTROLLER = {status: false, status_code: 500 , message: 'Devido a um erro interno no servidor da controller, não foi possível processar a requisição'}
 const ERROR_CONTENT_TYPE = {status: false, status_code: 415 , message: 'O content-type encaminhado não é suportado pelo servidor. você deve encaminhar apenas conteúdos no formato JSON'}

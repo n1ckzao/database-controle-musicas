@@ -14,9 +14,9 @@ const  inserirArtista = async function(artista, contentType){
 
         if(String(contentType).toLowerCase() == 'application/json')
         {
-        if(     artista.nome             == ''        ||  artista.nome             == null     ||  artista.nome             == undefined    ||  artista.nome.length > 100    ||
-                artista.biografia        == ''        ||  artista.biografia        == null     ||  artista.biografia        == undefined    ||  artista.biografia.length > 500 ||
-                artista.imagem_artista   == undefined ||  artista.imagem_artista.length > 200
+        if(     artista.nome             == '' ||  artista.nome           == null  ||  artista.nome             == undefined  ||  artista.nome.length > 100    ||
+                artista.biografia        == '' ||  artista.biografia      == null  || artista.biografia         == undefined  || artista.biografia.length > 2000 ||
+                artista.imagem_artista   == '' ||  artista.imagem_artista == null  || artista.imagem_artista    == undefined  || artista.imagem_artista.length > 200
         ){
             return message.ERROR_REQUIRED_FIELDS //400
         }else{
@@ -40,10 +40,10 @@ const  atualizarArtista = async function(id_artista, artista, contentType){
     try {
         if(String(contentType).toLowerCase() == 'application/json')
             {
-            if(     artista.nome             == ''        ||  artista.nome             == null      ||  artista.nome             == undefined    ||  artista.nome.length > 100    ||
-                    artista.biografia        == ''        ||  artista.biografia        == null      ||  artista.biografia        == undefined    ||  artista.biografia.length > 2000 ||
-                    artista.imagem_artista   == undefined ||  artista.imagem_artista.length > 200   ||
-                    id_artista               == ''        ||  id_artista               == undefined ||  id_artista               == null         || isNaN(id_artista)
+            if(     artista.nome             == ''  ||  artista.nome           == null      ||  artista.nome             == undefined  || artista.nome.length > 100    ||
+                    artista.biografia        == ''  ||  artista.biografia      == null      || artista.biografia         == undefined  || artista.biografia.length > 2000 ||
+                    artista.imagem_artista   == ''  || artista.imagem_artista  == null      || artista.imagem_artista    == undefined  || artista.imagem_artista.length > 200 ||
+                    id_artista               == ''  ||  id_artista             == null      ||  id_artista               == undefined  || isNaN(id_artista)
             ){
                 return message.ERROR_REQUIRED_FIELDS //400
             }else{
@@ -51,7 +51,6 @@ const  atualizarArtista = async function(id_artista, artista, contentType){
 
                 if(result != false || typeof(result) == 'object'){
                     if(result.length > 0){
-
                         artista.id_artista = id_artista
                         let resultArtista = await artistaDAO.updateArtista(artista)
 

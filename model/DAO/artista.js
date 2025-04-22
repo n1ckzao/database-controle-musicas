@@ -40,7 +40,7 @@ const updateArtista = async function(artista){
         let sql = `update tbl_artistas set      nome           = '${artista.nome}',
                                                 biografia      = '${artista.biografia}',
                                                 imagem_artista = '${artista.imagem_artista}'
-                                            where id = ${artista.id_artista}`
+                                            where id_artista = ${artista.id_artista}`
 
         let result = await prisma.$executeRawUnsafe(sql)
 

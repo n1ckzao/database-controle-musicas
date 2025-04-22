@@ -56,7 +56,6 @@ const  atualizarGenero = async function(id_genero, genero, contentType){
                         }else{
                             return message.ERROR_INTERNAL_SERVER_MODEL //500
                         }
-
                     }else{
                         return message.ERROR_NOT_FOUND //404
                     }
@@ -119,15 +118,15 @@ const  listarGenero = async function(){
         return message.ERROR_INTERNAL_SERVER_CONTROLLER //500
     }
 }
-const  buscarGenero = async function(id){
+const  buscarGenero = async function(id_genero){
 
     try {
-        if(id == '' || id == undefined || id == null || isNaN(id)){
+        if(id_genero == '' || id_genero == undefined || id_genero == null || isNaN(id_genero)){
             return message.ERROR_REQUIRED_FIELDS //400
         }else{
 
             let dadosGenero = {}
-            let resultGenero = await generoDAO.selectByIdGenero(id)
+            let resultGenero = await generoDAO.selectByIdGenero(id_genero)
 
             if(resultGenero != false || typeof(resultGenero == 'object')){
                 if(resultGenero.length > 0){

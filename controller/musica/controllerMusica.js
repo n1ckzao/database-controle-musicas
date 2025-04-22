@@ -55,7 +55,7 @@ const  atualizarMusica = async function(id, musica, contentType){
                     musica.link             == undefined ||  musica.link.length > 200        ||
                     id                      == ''        ||  id                 == undefined ||  id                      == null         || isNaN(id)
             ){
-                return message.ERROR_REQUIRED_FIELDS //status code 400
+                return message.ERROR_REQUIRED_FIELDS //400
             }else{
                 let result = await musicaDAO.selectByIdMusica(id)
 

@@ -11,7 +11,6 @@ const usuarioDAO = require ('../../model/DAO/usuario.js')
 
 const  inserirUsuario = async function(usuario, contentType){
     try {
-
         if(String(contentType).toLowerCase() == 'application/json')
         {
         if(     usuario.nome_usuario      == '' ||  usuario.nome_usuario     == null     ||  usuario.nome_usuario   == undefined    ||  usuario.nome_usuario.length > 100 ||
@@ -22,14 +21,13 @@ const  inserirUsuario = async function(usuario, contentType){
         ){
             return message.ERROR_REQUIRED_FIELDS
         }else{
-            let resultUsuario = await usuario.insertUsuario(usuario)
+            let resultUsuario = await usuarioDAO.insertUsuario(usuario)
 
             if(resultUsuario)
                 return message.SUCCESS_CREATED_ITEM
 
             else
                 return message.ERROR_INTERNAL_SERVER_MODEL
-        
             }
         }else{
             return message.ERROR_CONTENT_TYPE
@@ -38,25 +36,25 @@ const  inserirUsuario = async function(usuario, contentType){
         return message.ERROR_INTERNAL_SERVER_CONTROLLER
     }
 }
-const  atualizarUsuario = async function(id, usuario, contentType){
+const  atualizarUsuario = async function(id_usuario, usuario, contentType){
     try {
         if(String(contentType).toLowerCase() == 'application/json')
             {
             if(     usuario.nome_usuario      == '' ||  usuario.nome_usuario     == null     ||  usuario.nome_usuario   == undefined    ||  usuario.nome_usuario.length > 100 ||
                     usuario.email             == '' ||  usuario.email            == null     ||  usuario.email          == undefined    ||  usuario.email.length > 150   ||
                     usuario.senha             == '' ||  usuario.senha            == null     ||  usuario.senha          == undefined    ||  usuario.senha.length  > 50 ||
-                    usuario.data_criacao      == '' ||  usuario.data_criacao     == null     || usuario.data_criacao    == undefined    ||  usuario.data_criacao.length > 10 ||
+                    usuario.data_criacao      == '' ||  usuario.data_criacao     == null     ||  usuario.data_criacao   == undefined    ||  usuario.data_criacao.length > 10 ||
                     usuario.data_atualizacao  == undefined ||  usuario.data_atualizacao.length > 10 ||
-                    id                        == ''        ||  id                 == undefined      ||  id              == null         || isNaN(id)
+                    id_usuario                == ''        ||  id_usuario        == undefined      ||  id_usuario       == null         || isNaN(id_usuario)
             ){
                 return message.ERROR_REQUIRED_FIELDS
             }else{
-                let result = await usuarioDAO.selectByIdUsuario(id)
+                let result = await usuarioDAO.selectByIdUsuario(id_usuario)
 
                 if(result != false || typeof(result) == 'object'){
                     if(result.length > 0){
                         
-                        usuario.id = id
+                        usuario.id_usuario = id_usuario
                         let resultUsuario = await usuarioDAO.updateUsuario(usuario)
 
                         if(resultUsuario){
@@ -77,17 +75,17 @@ const  atualizarUsuario = async function(id, usuario, contentType){
     }
 }
 
-const  excluirUsuario = async function(id){
+const  excluirUsuario = async function(id_usuario){
     try {
-        if(id == '' || id == undefined || id == null || isNaN(id)){
+        if(id_usuario == '' || id_usuario == undefined || id_usuario == null || isNaN(id_usuario)){
             return message.ERROR_REQUIRED_FIELDS
         }else{
-            let resultUsuario = await usuarioDAO.selectByIdUsuario(id)
+            let resultUsuario = await usuarioDAO.selectByIdUsuario(id_usuario)
 
             if(resultUsuario != false || typeof(resultUsuario) == 'object'){
                 if (resultUsuario.length > 0){
                     //delete
-                    let result = await usuarioDAO.deleteUsuario(id)
+                    let result = await usuarioDAO.deleteUsuario(id_usuario)
 
                     if (result)
                         return message.SUCCESS_DELETE_ITEM
@@ -130,15 +128,15 @@ const  listarUsuario = async function(){
     }
 }
 
-const  buscarUsuario = async function(id){
+const  buscarUsuario = async function(id_usuario){
 
     try {
-        if(id == '' || id == undefined || id == null || isNaN(id)){
+        if(id_usuario == '' || id_usuario == undefined || id_usuario == null || isNaN(id_usuario)){
             return message.ERROR_REQUIRED_FIELDS //400
         }else{
 
             let dadosUsuario = {}
-            let resultUsuario = await usuarioDAO.selectByIdUsuario(id)
+            let resultUsuario = await usuarioDAO.selectByIdUsuario(id_usuario)
 
             if(resultUsuario != false || typeof(resultUsuario == 'object')){
                 if(resultUsuario.length > 0){

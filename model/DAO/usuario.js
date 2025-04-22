@@ -38,12 +38,12 @@ const insertUsuario = async function(usuario){
 
 const updateUsuario = async function(usuario){
     try {
-        let sql = `update tbl_usuarios set       nome            = '${usuario.nome_usuario}',
-                                                duracao         = '${usuario.email}',
-                                                data_lancamento = '${usuario.senha}',
-                                                letra           = '${usuario.data_criacao}',
-                                                link            = '${usuario.data_atualizacao}'
-                                            where id = ${usuario.id}`
+        let sql = `update tbl_usuarios set      nome_usuario     = '${usuario.nome_usuario}',
+                                                email            = '${usuario.email}',
+                                                senha            = '${usuario.senha}',
+                                                data_criacao     = '${usuario.data_criacao}',
+                                                data_atualizacao = '${usuario.data_atualizacao}'
+                                                where id_usuario = ${usuario.id_usuario}`
 
         let result = await prisma.$executeRawUnsafe(sql)
 
@@ -55,9 +55,9 @@ const updateUsuario = async function(usuario){
         return false
     }
 }
-const deleteUsuario = async function(id){
+const deleteUsuario = async function(id_usuario){
     try{
-        let sql = `delete from tbl_usuarios where id = ${id}`
+        let sql = `delete from tbl_usuarios where id_usuario = ${id_usuario}`
 
         let result = await prisma.$executeRawUnsafe(sql)
         
@@ -71,7 +71,7 @@ const deleteUsuario = async function(id){
 }
 const selectAllUsuario = async function (){
     try {
-        let sql = 'select * from tbl_usuarios order by id desc'
+        let sql = 'select * from tbl_usuarios order by id_usuario desc'
 
         let result = await prisma.$queryRawUnsafe(sql)
 
@@ -83,9 +83,9 @@ const selectAllUsuario = async function (){
         return false
     }
 }
-const selectByIdUsuario = async function(id){
+const selectByIdUsuario = async function(id_usuario){
     try {
-        let sql = `select * from tbl_usuarios where id = ${id}`
+        let sql = `select * from tbl_usuarios where id_usuario = ${id_usuario}`
 
         let result = await prisma.$queryRawUnsafe(sql)
 
