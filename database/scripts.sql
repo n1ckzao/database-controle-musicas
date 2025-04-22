@@ -23,6 +23,8 @@ CREATE TABLE tbl_genero (
   );
   
 select * from tbl_genero;
+
+select * from tbl_genero order by id_genero desc;
    
 CREATE TABLE tbl_artistas (
   id_artista      int not null primary key auto_increment,
@@ -41,3 +43,7 @@ CREATE TABLE tbl_usuarios (
   data_criacao		DATE NOT NULL,
   data_atualizacao 	DATE NULL
   );
+  
+select * from tbl_usuarios;
+  
+select * from tbl_usuarios order by id_usuario desc;
