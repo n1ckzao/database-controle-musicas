@@ -1,6 +1,6 @@
 /**************************************************************************************************************************
-* Objetivo: Criar o CRUD de dados da tabela de música no banco de dados
-* Data:01/04/2025
+* Objetivo: Criar o CRUD de dados da tabela de gênero no banco de dados
+* Data:25/02/2025
 * Autor: Nicolas
 * Versão: 1.0
 ***************************************************************************************************************************/
