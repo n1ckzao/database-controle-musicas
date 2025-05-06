@@ -1,18 +1,17 @@
 /**************************************************************************************************************************
-* Objetivo: Criar o CRUD de dados da tabela de gênero no banco de dados
-* Data:25/02/2025
+* Objetivo: Criar o CRUD de dados da tabela de música no banco de dados
+* Data:11/02/2025
 * Autor: Nicolas
 * Versão: 1.0
 ***************************************************************************************************************************/
-
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 
-const insertGenero = async function(genero){
+const insertPlaylist = async function(playlist){
     try {
 
-    let sql = `insert into tbl_genero (tipo_genero) 
-                                    values ('${genero.tipo_genero}')`
+    let sql = `insert into tbl_playlist (titulo, data_criacao, id_usuario)
+                               values ('${playlist.titulo}', '${playlist.data_criacao}', ${playlist.id_usuario})`
 
     let result = await prisma.$executeRawUnsafe(sql)
 
@@ -25,9 +24,13 @@ const insertGenero = async function(genero){
         return false
     }
 }
-const updateGenero = async function(genero){
+
+const updatePlaylist = async function(playlist){
     try {
-        let sql = `update tbl_genero set tipo_genero = '${genero.tipo_genero}' where id_genero = ${genero.id_genero}`
+        let sql = `update tbl_playlist set      titulo          = '${playlist.titulo}',
+                                                data_criacao = '${playlist.data_lancamento}',
+                                                id_artista      = '${playlist.id_artista}'
+                                                where id_playlist  = ${playlist.id_playlist}`
 
         let result = await prisma.$executeRawUnsafe(sql)
 
@@ -39,9 +42,9 @@ const updateGenero = async function(genero){
         return false
     }
 }
-const deleteGenero = async function(id_genero){
+const deletePlaylist = async function(id_playlist){
     try{
-        let sql = `delete from tbl_genero where id_genero = ${id_genero}`
+        let sql = `delete from tbl_playlist where id_playlist = ${id_playlist}`
 
         let result = await prisma.$executeRawUnsafe(sql)
         
@@ -53,9 +56,9 @@ const deleteGenero = async function(id_genero){
         return false
     }
 }
-const selectAllGenero = async function (){
+const selectAllPlaylist = async function (){
     try {
-        let sql = 'select * from tbl_genero order by id_genero desc'
+        let sql = 'select * from tbl_playlist order by id_playlist desc'
 
         let result = await prisma.$queryRawUnsafe(sql)
 
@@ -67,9 +70,9 @@ const selectAllGenero = async function (){
         return false
     }
 }
-const selectByIdGenero = async function(id_genero){
+const selectByIdPlaylist = async function(id_playlist){
     try {
-        let sql = `select * from tbl_genero where id_genero = ${id_genero}`
+        let sql = `select * from tbl_playlist where id_playlist = ${id_playlist}`
 
         let result = await prisma.$queryRawUnsafe(sql)
 
@@ -83,9 +86,9 @@ const selectByIdGenero = async function(id_genero){
 }
 
 module.exports = {
-    insertGenero,
-    updateGenero,
-    deleteGenero,
-    selectAllGenero,
-    selectByIdGenero
+    insertPlaylist,
+    updatePlaylist,
+    deletePlaylist,
+    selectAllPlaylist,
+    selectByIdPlaylist
 }
