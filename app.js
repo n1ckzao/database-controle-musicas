@@ -28,6 +28,8 @@ const controllerMusica = require('./controller/musica/controllerMusica.js')
 const controllerGenero = require('./controller/genero/controllerGenero.js')
 const controllerArtista = require('./controller/artista/controllerArtista.js')
 const controllerUsuario = require('./controller/usuario/controllerUsuarios.js')
+const controllerAlbum = require('./controller/album/controllerAlbum.js')
+const controllerPlaylist = require('./controller/playlist/controllerPlaylist.js')
 
 //cria um objeto para o body do tipo JSON
 const bodyParserJSON = bodyParser.json()
@@ -244,6 +246,78 @@ app.put('/v1/controle-musicas/usuario/:id', cors(), bodyParserJSON, async functi
 
     response.status(resultUsuario.status_code)
     response.json(resultUsuario)
+})
+app.post('/v1/controle-musicas/album', cors(), bodyParserJSON, async function(request, response){
+
+    let contentType = request.headers['content-type']
+    let dadosBody = request.body
+    let resultAlbum = await controllerAlbum.inserirAlbum(dadosBody, contentType)
+
+    response.status(resultAlbum.status_code)
+    response.json(resultAlbum)
+})
+app.get('/v1/controle-musicas/album', cors(), async function(request, response){
+
+    let resultAlbum = await controllerAlbum.listarAlbum()
+
+    response.status(resultAlbum.status_code)
+    response.json(resultAlbum)
+})
+
+app.get('/v1/controle-musicas/album/:id', cors(), bodyParserJSON, async function(request, response){
+
+    let idAlbum = request.params.id
+
+    let resultAlbum = await controllerAlbum.buscarAlbum(idAlbum)
+
+    response.status(resultAlbum.status_code)
+    response.json(resultAlbum)
+})
+app.put('/v1/controle-musicas/album/:id', cors(), bodyParserJSON, async function (request, response){
+
+    let contentType = request.headers['content-type']
+    let dadosBody = request.body
+    let idAlbum = request.params.id
+    let resultAlbum = await controllerAlbum.atualizarAlbum(idAlbum, dadosBody, contentType)
+
+    response.status(resultAlbum.status_code)
+    response.json(resultAlbum)
+})
+app.post('/v1/controle-musicas/playlist', cors(), bodyParserJSON, async function(request, response){
+
+    let contentType = request.headers['content-type']
+    let dadosBody = request.body
+    let resultPlaylist = await controllerPlaylist.inserirPlaylist(dadosBody, contentType)
+
+    response.status(resultPlaylist.status_code)
+    response.json(resultPlaylist)
+})
+app.get('/v1/controle-musicas/playlist', cors(), async function(request, response){
+
+    let resultPlaylist = await controllerPlaylist.listarPlaylist()
+
+    response.status(resultPlaylist.status_code)
+    response.json(resultPlaylist)
+})
+
+app.get('/v1/controle-musicas/playlist/:id', cors(), bodyParserJSON, async function(request, response){
+
+    let idPlaylist = request.params.id
+
+    let resultPlaylist = await controllerPlaylist.buscarPlaylist(idPlaylist)
+
+    response.status(resultPlaylist.status_code)
+    response.json(resultPlaylist)
+})
+app.put('/v1/controle-musicas/playlist/:id', cors(), bodyParserJSON, async function (request, response){
+
+    let contentType = request.headers['content-type']
+    let dadosBody = request.body
+    let idPlaylist = request.params.id
+    let resultPlaylist = await controllerPlaylist.atualizarPlaylist(idPlaylist, dadosBody, contentType)
+
+    response.status(resultPlaylist.status_code)
+    response.json(resultPlaylist)
 })
 
 app.listen('8080', function(){

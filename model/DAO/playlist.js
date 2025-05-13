@@ -11,7 +11,11 @@ const insertPlaylist = async function(playlist){
     try {
 
     let sql = `insert into tbl_playlist (titulo, data_criacao, id_usuario)
-                               values ('${playlist.titulo}', '${playlist.data_criacao}', ${playlist.id_usuario})`
+                               values  (
+                                        '${playlist.titulo}', 
+                                        '${playlist.data_criacao}',
+                                        '${playlist.id_usuario}'
+                                         )`
 
     let result = await prisma.$executeRawUnsafe(sql)
 
@@ -30,7 +34,7 @@ const updatePlaylist = async function(playlist){
         let sql = `update tbl_playlist set      titulo          = '${playlist.titulo}',
                                                 data_criacao = '${playlist.data_lancamento}',
                                                 id_artista      = '${playlist.id_artista}'
-                                                where id_playlist  = ${playlist.id_playlist}`
+                                            where id_playlist  = ${playlist.id_playlist}`
 
         let result = await prisma.$executeRawUnsafe(sql)
 

@@ -9,12 +9,12 @@
 const message = require('../../modulo/config.js')
 const artistaDAO = require ('../../model/DAO/artista.js')
 
-const  inserirArtista = async function(artista, contentType){
+const inserirArtista = async function(artista, contentType){
     try {
 
         if(String(contentType).toLowerCase() == 'application/json')
         {
-        if(     artista.nome             == '' ||  artista.nome           == null  ||  artista.nome             == undefined  ||  artista.nome.length > 100    ||
+        if(     artista.nome             == '' ||  artista.nome           == null  || artista.nome             == undefined  ||  artista.nome.length > 100    ||
                 artista.biografia        == '' ||  artista.biografia      == null  || artista.biografia         == undefined  || artista.biografia.length > 2000 ||
                 artista.imagem_artista   == '' ||  artista.imagem_artista == null  || artista.imagem_artista    == undefined  || artista.imagem_artista.length > 200
         ){

@@ -9,7 +9,7 @@
 const message = require('../../modulo/config.js')
 const generoDAO = require ('../../model/DAO/genero.js')
 
-const  inserirGenero = async function(genero, contentType){
+const inserirGenero = async function(genero, contentType){
     try {
 
         if(String(contentType).toLowerCase() == 'application/json')
